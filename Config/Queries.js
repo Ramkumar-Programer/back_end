@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS ${tableName} (
     listId INT PRIMARY KEY AUTO_INCREMENT,
     listName VARCHAR(255),
     userName VARCHAR(255),
-    FOREIGN KEY (userName) REFERENCES userlogin(email) ON DELETE CASCADE
+    FOREIGN KEY (userName) REFERENCES userLogin(email) ON DELETE CASCADE
 )
 `;
 
