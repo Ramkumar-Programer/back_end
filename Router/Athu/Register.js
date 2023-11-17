@@ -7,10 +7,7 @@ const {insertNewUserQuery,createListTableQuery,createCardTableQuery,executeQuery
 
 
 router.post('/addUser', async  (req, res) =>{
-    
-    console.log(req.body)
     try{
-        console.log("came")
         const tableListName = req.body.email_id.replace('@', '_').replace('.', '_') + '_list';
         const tableCardName = req.body.email_id.replace('@', '_').replace('.', '_') + '_card';
 
@@ -29,7 +26,6 @@ router.post('/addUser', async  (req, res) =>{
 
 router.post('/emailIdExists', async (req, res) => {
     try {
-      console.log(req.body.email_id)
       const result = await executeQuery(dbConfig, selectUserQuery, [req.body.email_id]);
       
       if (result.length > 0) {
