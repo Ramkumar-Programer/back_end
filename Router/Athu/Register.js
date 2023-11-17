@@ -2,6 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const dbConfig = require('../../Config/Config');
 const {insertNewUserQuery,createListTableQuery,createCardTableQuery,executeQuery, selectUserQuery} = require('../../Config/Queries')
 
