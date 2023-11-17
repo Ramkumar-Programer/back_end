@@ -7,6 +7,7 @@ const {insertNewUserQuery,createListTableQuery,createCardTableQuery,executeQuery
 
 
 router.post('/addUser', async  (req, res) =>{
+    
     try{
         const tableListName = req.body.email_id.replace('@', '_').replace('.', '_') + '_list';
         const tableCardName = req.body.email_id.replace('@', '_').replace('.', '_') + '_card';
@@ -25,9 +26,10 @@ router.post('/addUser', async  (req, res) =>{
 })
 
 router.post('/emailIdExists', async (req, res) => {
+    console.log(req.body.email_id)
     try {
       const result = await executeQuery(dbConfig, selectUserQuery, [req.body.email_id]);
-      
+      console.log(result);
       if (result.length > 0) {
         // Email ID exists
         res.status(200).json({ exists: true, message: 'Email ID exists' });
