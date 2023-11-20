@@ -173,16 +173,14 @@ router.post('/forgotPassword', async  (req, res) =>{
 
 
 function hashPassword(password) {
-    const pepperedPassword = password + "test";
+    const pepperedPassword = password + process.env.SECRET_KEY;
     return bcrypt.hashSync(pepperedPassword, bcrypt.genSaltSync(saltRounds));
   
 }
 
 function comparePasswords(enteredPassword, hashedPassword) {
-  return bcrypt.compareSync(enteredPassword + "test", hashedPassword);
+  return bcrypt.compareSync(enteredPassword + process.env.SECRET_KEY, hashedPassword);
 }
-
-
 
 
 
