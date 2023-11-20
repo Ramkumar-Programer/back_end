@@ -159,7 +159,7 @@ otpRouter.post('/deleteOtp' , async (req, res) =>{
       //console.log(result)
       for(let i = 0; result.length > i; i++)
       {
-        console.log(result[i].emailId)
+        //console.log(result[i].emailId)
         await executeQuery(dbConfig, deleteOptQueryAuto, result[i].emailId);
       }
       
