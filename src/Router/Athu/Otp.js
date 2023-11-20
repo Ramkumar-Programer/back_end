@@ -155,16 +155,14 @@ otpRouter.post('/deleteOtp' , async (req, res) =>{
  async function deleteOtp(type, mail) {
   try {
     if (type === "auto") {
-      const result = await dbConfig.query(selectVerifedOpt, [false])
-      //await executeQuery(dbConfig, selectVerifedOpt, [false]);
+      const result = await executeQuery(dbConfig, selectVerifedOpt, [false]);
       //console.log(result)
       for(let i = 0; result.length > i; i++)
       {
         console.log(result[i].emailId)
-        await dbConfig.query(deleteOptQueryAuto, [result[i].emailId])
-        //await executeQuery(dbConfig, deleteOptQueryAuto, result[i].emailId);
+        await executeQuery(dbConfig, deleteOptQueryAuto, result[i].emailId);
       }
-
+      
       //console.log("inside auto")
     } else {
        executeQuery(dbConfig, deleteOptQuery, [mail]);
