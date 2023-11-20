@@ -30,11 +30,16 @@ connectAndInitializeDatabase();
 app.use('/athu', registerRouter);
 app.use('/otp', otpRouter);
 
-cron.schedule('*/7 * * * *', () => {
-    console.log("came inside")
-    const result = deleteOtp("auto");
-    console.log(result)
+cron.schedule('*/7 * * * *', async () => {
+    console.log("came inside auot detele");
+    try {
+        const result = await deleteOtp("auto");
+        console.log(result);
+    } catch (error) {
+        console.error('Error in cron job:', error);
+    }
 });
+
   
 
 
