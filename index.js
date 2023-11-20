@@ -1,14 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 
+require('dotenv').config();
 
-const connectAndInitializeDatabase = require('./Config/DbConnection');
-const registerRouter = require('./Router/Athu/Register')
+const cron = require('node-cron');
+const dbConfig = require('./src/Config/Config');
+
+
+const connectAndInitializeDatabase = require('./src/Config/DbConnection');
+const registerRouter = require('./src/Router/Athu/Athu')
+const {otpRouter,deleteOtp} = require('./src/Router/Athu/Otp')
 
 
 const app = express();
 app.use(express.json());
-//app.use(cors());
 const corsOptions = {
     origin: ['http://localhost:3000', 'https://frontend-dkq5.onrender.com'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -18,15 +23,19 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
 connectAndInitializeDatabase();
 
 
 
-app.use('/api', registerRouter);
+app.use('/athu', registerRouter);
+app.use('/otp', otpRouter);
 
-
-
+cron.schedule('*/7 * * * *', () => {
+    console.log("came inside")
+    const result = deleteOtp("auto");
+    console.log(result)
+});
+  
 
 
 const PORT = process.env.PORT || 3000;
